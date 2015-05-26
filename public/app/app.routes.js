@@ -1,7 +1,7 @@
 /// <reference path="../../typings/angularjs/angular.d.ts" />
 /// <reference path="../../bower_components/angular-ui-router/api/angular-ui-router.d.ts" />
 
-var app = angular.module('iwallet', ['ui.router']);
+var app = angular.module('iwallet');
 
 app.config([
   '$stateProvider',
@@ -12,12 +12,25 @@ app.config([
       templateUrl: '/home.html',
       controller: 'MainCtrl',
       resolve: {
-        postPromise: [
-          'accounts',
-          function (accounts) {
-            return accounts.getAll();
-          }]
+//        postPromise: [
+//          'accounts',
+//          function (accounts) {
+//            return accounts.getAll();
+//          }]
       }
-    })
+    });
+    $stateProvider.state('accounts', {
+      url: '/accounts',
+      templateUrl: '/accounts.html',
+      controller: 'AccountsCtrl',
+      resolve: {
+        postPromise: [
+          'Account',
+          function () {
+            
+          }
+        ]
+      }
+    });
   }
-])
+]);
