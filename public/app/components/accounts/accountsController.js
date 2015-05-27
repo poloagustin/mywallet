@@ -7,15 +7,9 @@ app.controller('AccountsCtrl', [
 	'$scope',
 	'Account',
 	function ($scope, Account) {
-    $scope.accounts = [];
-    
     Account.getAll(function (data) {
       angular.copy(data, $scope.accounts);
     });
-    
-    $scope.name = '';
-    $scope.description = '';
-    $scope.type = 0;
     
     $scope.addAccount = function (account) {
       if (!$scope.name || $scope.name === '') {
@@ -37,7 +31,7 @@ app.controller('AccountsCtrl', [
     };     
 
     $scope.updateAccount = function (account) {
-      Account.udpate(account, function (data) {
+      Account.update(account, function (data) {
         var pos = $scope.accounts.map(function (e) { return e._id; }).indexOf(data._id);
         $scope.accounts[pos] = data;
       });
@@ -59,23 +53,44 @@ app.controller('AccountsCtrl', [
       };
       
       if ($scope.id) {
-        account.id = $scope.id;
+        account._id = $scope.id;
       }
       
       return account;
     };
     
     $scope.getAccountType = function (type) {
-      return type === 0 ? 'EXPENSE' : 'INCOME';
+      return type === 0 ? '(-)' : '(+)';
     };
     
+    $scope.beginEditAccount = function (account) {
+      $scope.id = account._id;
+      $scope.name = account.name;
+      $scope.description = account.description;
+      $scope.type = account.type;
+    };
+    
+    $scope.endEditAccount = function () {
+      if ($scope.id) {
+        delete $scope.id;
+      }
+      
+      $scope.name = '';
+      $scope.description = '';
+      $scope.type = 0;
+    };
+
     $scope.submitAccount = function () {
       var account = $scope.getFormAccount();
-      if (!account.id) {
+      if (!account._id) {
         $scope.addAccount(account);
       } else {
         $scope.updateAccount(account);
       }
     };
+
+    $scope.accounts = [];
+    
+    $scope.endEditAccount();
 	}
 ]);

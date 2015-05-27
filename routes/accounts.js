@@ -41,6 +41,15 @@ router.param('account', function (req, res, next, id) {
     }
   });
 })
+.put('/', function (req, res, next) {
+  Account.findByIdAndUpdate(req.body._id, req.body, function (err, account) {
+    if (err) {
+      next(err);
+    }
+    
+    res.json(req.body);
+  });
+})
 .delete('/:account', function (req, res, next) {
   req.account.remove(function (err) {
     if (err) {
