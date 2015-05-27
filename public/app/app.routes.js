@@ -9,28 +9,24 @@ app.config([
   function ($stateProvider, $urlRouterProvider) {
     $stateProvider.state('home', {
       url: '/home',
-      templateUrl: '/home.html',
-      controller: 'MainCtrl',
-      resolve: {
+//      templateUrl: '/home.html',
+      templateUrl: '/app/components/home/homeView.html',
+      controller: 'HomeCtrl',
+//      resolve: {
 //        postPromise: [
 //          'accounts',
 //          function (accounts) {
 //            return accounts.getAll();
 //          }]
-      }
+//      }
     });
     $stateProvider.state('accounts', {
       url: '/accounts',
-      templateUrl: '/accounts.html',
-      controller: 'AccountsCtrl',
-      resolve: {
-        postPromise: [
-          'Account',
-          function () {
-            
-          }
-        ]
-      }
+//      templateUrl: '/accounts.html',
+      templateUrl: '/app/components/accounts/accountsView.html',
+      controller: 'AccountsCtrl'
     });
+
+		$urlRouterProvider.otherwise('home');
   }
 ]);

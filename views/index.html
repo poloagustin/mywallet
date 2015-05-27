@@ -4,13 +4,19 @@
     <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"></link>
     <script src="/bower_components/angular/angular.min.js"></script>
     <script src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-    <script src="/javascripts/app.js"></script>
+    <script src="/app/app.module.js"></script>
+    <script src="/app/app.routes.js"></script>
+    <script src="/app/components/accounts/accountsController.js"></script>
+    <script src="/app/components/accounts/accountsService.js"></script>
+    <script src="/app/components/home/homeController.js"></script>
+    <script src="/app/components/shared/navigation/navigationController.js"></script>
     <style>
       .glyphicon-thumbs-up { cursor: pointer }
+      .glyphicon-edit { cursor: pointer } 
       .glyphicon-remove { cursor: pointer } 
     </style>
   </head>
-  <body ng-app="iwallet">
+  <body ng-app="iwallet"">
     <nav class="navbar navbar-default" ng-controller="NavCtrl">
       <ul class="nav navbar-nav">
         <li><a href="/#/index">Home</a></li>
@@ -28,7 +34,7 @@
         <ui-view></ui-view>
       </div>
     </div>
-		<script type="text/ng-template" id="/index.html" src="/home.html"></script>
-		<script type="text/ng-template" id="/accounts.html" src="/accounts.html"></script>
+<!--		<script type="text/ng-template" id="/index.html" src="/app/components/home/homeView.html"></script>
+		<script type="text/ng-template" id="/accounts.html" src="/app/components/accounts/accountsView.html"></script>-->
   </body>
 </html>

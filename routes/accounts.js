@@ -14,12 +14,12 @@ router.param('account', function (req, res, next, id) {
     } else if (!account) {
       new Error("Can't find Account.");
     } else {
-      res.account = account;
+      req.account = account;
       next();
     }
   });
 })
-.get('/accounts', function (req, res, next) {
+.get('/', function (req, res, next) {
   Account.find(function (err, accounts) {
     if (err) {
       next(err);
@@ -28,10 +28,10 @@ router.param('account', function (req, res, next, id) {
     res.json(accounts);
   });
 })
-.get('/accounts/:account', function (req, res, next) {
-    res.json(res.account);
+.get('/:account', function (req, res, next) {
+  res.json(res.account);
 })
-.post('/accounts', function (req, res, next) {
+.post('/', function (req, res, next) {
   var account = new Account(req.body);
   account.save(function (err, account) {
     if (err) {
@@ -39,6 +39,15 @@ router.param('account', function (req, res, next, id) {
     } else {
       res.json(account);
     }
+  });
+})
+.delete('/:account', function (req, res, next) {
+  req.account.remove(function (err) {
+    if (err) {
+      next(err);
+    }
+    
+    res.json({});
   });
 });
 

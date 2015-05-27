@@ -2,15 +2,29 @@
 	<h1>IWallet</h1>
 </div>
 <div ng-show="isLoggedIn()">
-  <div ng-repeat="account in accounts | orderBy: '-name'">
-    {{account.name}}
-  </div>
-  <form ng-submit="addAccount()" style="margin-top:30px">
+  <table class="table">
+    <tr ng-repeat="account in accounts | orderBy: -name" ng-class="getRowClass(account)">
+      <td class="col-md-1"><span class="glyphicon glyphicon-edit" ng-click="updateAccount(account)"></span></td>
+      <td class="col-md-1"><span class="glyphicon glyphicon-remove" ng-click="deleteAccount(account)"></span></td>
+      <td class="col-md-8">{{account.name}}</td>
+      <td class="col-md-2">{{getAccountType(account.type)}}</td>
+    </tr>
+  </table>
+  <form ng-submit="submitAccount()" style="margin-top:30px">
   	<h3>Add a new Account</h3>
   	<div class="form-group">
   		<input type="text" ng-model="name" placeholder="Name" class="form-control"></input>
   	</div>
-  	<button type="submit" class="btn btn-primary">Add</button>
+  	<div class="form-group">
+  		<input type="text" ng-model="description" placeholder="Description" class="form-control"></input>
+  	</div>
+  	<div class="form-group">
+  		<select class="form-control" ng-model="type" convert-to-number>
+        <option value="0" selected>Expense</option>
+        <option value="1">Income</option>
+      </select>
+  	</div>
+  	<button type="submit" class="btn btn-primary">Create</button>
   </form>
 </div>
 <div ng-hide="isLoggedIn()">

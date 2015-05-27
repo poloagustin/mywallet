@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+// #!/usr/bin/env node
 var debug = require('debug')('iwallet');
 var app = require('../app');
 
