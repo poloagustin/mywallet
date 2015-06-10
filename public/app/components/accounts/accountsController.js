@@ -18,6 +18,7 @@ app.controller('AccountsCtrl', [
       
       Account.create(account, function (data) {
         $scope.accounts.push(data);
+        $scope.endEditAccount();
       });
     };
 
@@ -34,6 +35,7 @@ app.controller('AccountsCtrl', [
       Account.update(account, function (data) {
         var pos = $scope.accounts.map(function (e) { return e._id; }).indexOf(data._id);
         $scope.accounts[pos] = data;
+        $scope.endEditAccount();
       });
     };
     
